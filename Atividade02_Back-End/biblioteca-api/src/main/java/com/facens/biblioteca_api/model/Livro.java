@@ -1,5 +1,7 @@
 package com.facens.biblioteca_api.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +20,11 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Livro {
+
+    private LocalDate dataEmprestimo;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 }

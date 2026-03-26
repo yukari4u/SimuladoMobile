@@ -18,7 +18,7 @@ import com.facens.biblioteca_api.service.LivroService;
 
 @RestController
 
-@RequestMapping
+@RequestMapping("/livros")
 
 public class LivroController {
     
