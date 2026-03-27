@@ -2,8 +2,8 @@ package com.facens.biblioteca_api.service;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.facens.biblioteca_api.model.Livro;
@@ -21,7 +21,7 @@ public class LivroService {
     }
 
     public Livro buscarPorId(Long id) {
-        return livroRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpsStatus.NOT_FOUND, 
+        return livroRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, 
         "Livro não encontrado"
         ));
     }
@@ -42,7 +42,20 @@ public class LivroService {
             livroExistente.setTitulo(livroAtualizado.getTitulo());
             livroExistente.setAutor(livroAtualizado.getAutor());
         
+            if (livroAtualizado.getEmprestado() != null) {
+                livroExistente.setEmprestado(livroAtualizado.getEmprestado());
 
+                if (Boolean.TRUE.equals(livroAtualizado.
+                    getEmprestado()) && livroAtualizado.getDataEmprestimo() == null){
+                        livroExistente.setDataEmprestimo(LocalDate.now());
+                } else if (Boolean.FALSE.equals(LocalDate.now())) {
+                    livroExistente.setDataEmprestimo(null);
+                } else {
+                    livroExistente.setDataEmprestimo(livroAtualizado.getDataEmprestimo());
+                }
+            }
+
+            return livroRepository.save(livroExistente);
     }
 
 }
