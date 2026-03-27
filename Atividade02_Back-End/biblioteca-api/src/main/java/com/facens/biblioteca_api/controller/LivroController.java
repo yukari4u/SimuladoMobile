@@ -39,29 +39,29 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public Livro buscaPorId(PathVariable Long id){
-        return livroService.buscaPorId(id);
+    public Livro buscarPorId(@PathVariable Long id) {
+        return livroService.buscarPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Livro criarLivro(@RequestBody Livro livro) {
-        return livroService.criarLivro(livro);
+        return livroService.criar(livro);
     }
 
     @PutMapping("/{id}")
     public Livro atualizarLivro(@PathVariable Long id, @RequestBody Livro livro) {
-        return livroService.atualizarLivro(id, livro);
+        return livroService.atualizar(id, livro);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerLivro(@PathVariable Long id) {
-        return livroService.deletar(id);
+        livroService.deletar(id);
     }
 
     @PutMapping("/{id}/emprestar")
-    public Livro emprestarLivro(@PathVariable Long id) {    
+    public Livro emprestarLivro(@PathVariable Long id) {
         return livroService.emprestar(id);
     }
 

@@ -18,13 +18,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Livro {
-
-    private LocalDate dataEmprestimo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String titulo;
+
+    private String autor;
+
+    @Builder.Default
+    private Boolean emprestado = false;
+
+    private LocalDate dataEmprestimo;
 }
